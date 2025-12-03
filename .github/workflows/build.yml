@@ -26,7 +26,9 @@ jobs:
         channel: 'stable'
 
     - name: Install Dependencies
-      run: flutter pub get
+      run: |
+        flutter create . --org com.studyai
+        flutter pub get
 
     - name: Run Build Runner
       run: flutter pub run build_runner build --delete-conflicting-outputs
