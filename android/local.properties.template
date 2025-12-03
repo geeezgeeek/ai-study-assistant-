@@ -1,0 +1,3 @@
+# This file is used to store the Flutter SDK path
+# It should not be committed to version control
+flutter.sdk=C:\\flutter

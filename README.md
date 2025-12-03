@@ -1,53 +1,60 @@
-# AI Study Assistant
+# AI Study Assistant - Android App
 
-An AI-powered study assistant app built with Flutter. This app allows you to import PDF documents, extract text, and automatically generate flashcards and mock tests using the Gemini API.
+## Setup Instructions
 
-## Features
-- **PDF Import**: Extract text from any PDF study material.
-- **AI Generation**: Automatically creates flashcards and multiple-choice questions.
-- **Flashcards**: Interactive study mode with flip animation.
-- **Mock Tests**: Take quizzes and track your score.
-- **Progress Tracking**: Visualize your study streaks and activity.
-- **Local Storage**: All data is saved locally using Hive.
+### Prerequisites
+- Flutter SDK installed
+- Android Studio or VS Code with Flutter extensions
+- Java JDK 17 or higher
 
-## Setup
+### Building the APK
 
-1. **Prerequisites**:
-    - Flutter SDK installed (v3.0+)
-    - Android Studio or VS Code
+#### Local Build
+1. Navigate to project directory
+2. Run `flutter pub get` to install dependencies
+3. Run `flutter build apk --release` to build release APK
+4. APK will be in `build/app/outputs/flutter-apk/app-release.apk`
 
-2. **Installation**:
-    ```bash
-    flutter pub get
-    flutter pub run build_runner build --delete-conflicting-outputs
-    ```
+#### GitHub Actions
+The repository includes a GitHub Actions workflow that automatically builds the APK when you push to main/master branch.
 
-3. **API Key**:
-    - Get a Gemini API Key from [Google AI Studio](https://aistudio.google.com/).
-    - Enter the key in the app when prompted on the Import Screen.
+1. Push your code to GitHub
+2. Go to Actions tab in your repository
+3. The workflow will run automatically
+4. Download the built APK from the artifacts section
 
-4. **Run**:
-    ```bash
-    flutter run
-    ```
+### Important Files Added
 
-## Building APK (Android)
+**Gradle Configuration:**
+- `android/build.gradle` - Root build configuration
+- `android/settings.gradle` - Project settings
+- `android/gradle.properties` - Build properties
+- `android/app/build.gradle` - App-level build config
+- `android/gradle/wrapper/gradle-wrapper.properties` - Gradle wrapper
 
-You can build the APK locally or use the included GitHub Actions workflow.
+**Android Platform:**
+- `android/app/src/main/AndroidManifest.xml` - App manifest with permissions
+- `android/app/src/main/kotlin/com/study/ai_assistant/MainActivity.kt` - Main activity
+- `android/app/src/main/res/values/styles.xml` - App themes
+- `android/app/src/main/res/drawable/launch_background.xml` - Launch screen
 
-**Locally:**
-```bash
-flutter build apk --release
-```
+**CI/CD:**
+- `.github/workflows/build-apk.yml` - GitHub Actions workflow for APK building
 
-**GitHub Actions:**
-1. Push this code to a GitHub repository.
-2. Go to the "Actions" tab.
-3. Select "Build Android APK".
-4. Download the artifact once the build completes.
+### Package Name
+`com.study.ai_assistant`
 
-## Architecture
-- **State Management**: Riverpod
-- **Database**: Hive
-- **AI**: Google Generative AI (Gemini)
-- **PDF**: Syncfusion Flutter PDF
+### SDK Versions
+- Minimum SDK: 21 (Android 5.0)
+- Target SDK: 34 (Android 14)
+- Compile SDK: 34
+
+### Permissions
+- INTERNET - For AI API calls
+- READ_EXTERNAL_STORAGE - For importing PDFs
+- WRITE_EXTERNAL_STORAGE - For saving study data
+
+### Notes
+- Launcher icons need to be added (see `android/app/src/main/res/LAUNCHER_ICONS_README.md`)
+- The app uses debug signing for now (update for production release)
+- GitHub Actions will build on every push to main/master branch

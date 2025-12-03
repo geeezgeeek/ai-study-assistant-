@@ -2,40 +2,39 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main, master ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Java
-      uses: actions/setup-java@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Java
+      uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
         java-version: '17'
-
-    - name: Set up Flutter
+        
+    - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.19.0'
+        flutter-version: '3.16.0'
         channel: 'stable'
-
-    - name: Install Dependencies
+        
+    - name: Get dependencies
       run: flutter pub get
-
-    - name: Run Build Runner
-      run: flutter pub run build_runner build --delete-conflicting-outputs
-
+      
     - name: Build APK
       run: flutter build apk --release
-
+      
     - name: Upload APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-release
         path: build/app/outputs/flutter-apk/app-release.apk

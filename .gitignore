@@ -29,12 +29,23 @@
 .pub/
 /build/
 
-# Android
-android/**/*.gradle
+# Android - Build outputs and generated files
+android/**/build/
+android/.gradle/
+android/captures/
+android/local.properties
+android/**/.cxx/
 android/**/gradlew
 android/**/gradlew.bat
-android/local.properties
 android/app/src/main/assets/
+
+# But keep these essential files for GitHub Actions
+!android/build.gradle
+!android/settings.gradle
+!android/gradle.properties
+!android/app/build.gradle
+!android/gradle/wrapper/gradle-wrapper.properties
+!android/gradle/wrapper/gradle-wrapper.jar
 
 # iOS
 ios/**/*.mode1v3
